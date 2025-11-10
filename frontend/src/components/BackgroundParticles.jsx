@@ -32,11 +32,11 @@ export default function BackgroundParticles() {
   if (!ready) return null
 
   return (
-    <Particles
-      id="tsparticles"
-      className="absolute inset-0 w-screen h-[100vh]"
-      style={{ zIndex: 0, pointerEvents: 'none' }} // behind content, not blocking clicks
-      options={options}
-    />
-  )
+  <Particles
+    id="tsparticles"
+    className="absolute inset-0 -z-20 pointer-events-none"
+    options={options}
+  />
+)
+
 }

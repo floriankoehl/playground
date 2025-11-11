@@ -1,24 +1,53 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import ApiExample from './pages/ApiExample.jsx'
-import GraphCV from './pages/GraphCV.jsx'
+import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <nav className="flex gap-4 p-4 bg-gray-200">
-        <Link to="/">Home</Link>
-        <Link to="/api-example">API Example</Link>
-        <Link to="/cv-graph">CV Graph</Link>
-      </nav>
-      <div className="p-6">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/api-example" element={<ApiExample />} />
-          <Route path="/cv-graph" element={<GraphCV />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  )
+import MainPage from './b_pages/MainPage'
+import About from './b_pages/About'
+import Contact from './b_pages/Contact'
+import Layout from './b_layout/Layout'
+import History from './b_pages/History'
+import Users from './b_pages/Users'
+
+const hardcoded_users = [
+    {name: "Flroian", test: "This is some important text"},
+    {name: "Denis", test: "This is some important text"},
+    {name: "Melli", test: "This is some important text"},
+    {name: "Philipp", test: "This is some important text"},
+    {name: "Stephan", test: "This is some important text"},
+    {name: "Kleo", test: "This is some important text"},
+    {name: "David", test: "This is some important text"},
+    {name: "Sigrid", test: "This is some important text"}
+]
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout/>, 
+    children: [
+      {index: true, element: <MainPage/>},
+      {path: "contact", element: <Contact/>},
+      
+      {
+          path: "about", 
+          children: [
+              {index: true, element: <About/>},
+              {path: "history", element: <History/>},
+      ]},
+
+      {path: "users", element: <Users sample_users={hardcoded_users}/>}
+
+    ],
+
+  },
+]);
+
+
+export default function App(){
+  return <RouterProvider router={router}/>;
 }
+
+
+
+
+
+

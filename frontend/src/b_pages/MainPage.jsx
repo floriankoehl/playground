@@ -14,11 +14,13 @@ export default function MainPage() {
   }
 
   const route_conditionally = () => {
-    if (user_input == "Route") {
+    if (user_input == "Philipp" | user_input == "Florian" | user_input == "abc") {
       setTest_State("")
-      navigate("/users")
+      navigate(`users/${user_input}`)
+
     } else {
       setTest_State("NOT CORRECT")
+      
     }
   }
 

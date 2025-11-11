@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.http import JsonResponse
 from django.urls import path
-from api.views import echo_view   # nutzt unsere Minimal-API
+from api.views import echo_view, show_user   # nutzt unsere Minimal-API
 
 def root_view(request):
     # Antwort für GET http://127.0.0.1:8000/
@@ -26,6 +26,7 @@ def root_view(request):
 urlpatterns = [
     path('', root_view),                               # ← NEU: Root
     path('admin/', admin.site.urls),
-    path('api/echo/<str:text>/', echo_view),           # Path-Param
+    path('api/echo/<str:text>/', echo_view),
+    path('api/show_user/<str:name>/', show_user)# Path-Param
 ]
 

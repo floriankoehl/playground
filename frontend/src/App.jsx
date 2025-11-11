@@ -1,11 +1,4 @@
-import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import MainPage from './b_pages/MainPage'
-import About from './b_pages/About'
-import Contact from './b_pages/Contact'
-import Layout from './b_layout/Layout'
-import History from './b_pages/History'
-import Users from './b_pages/Users'
 
 const hardcoded_users = [
     {name: "Flroian", test: "This is some important text"},
@@ -19,13 +12,39 @@ const hardcoded_users = [
 ]
 
 
+
+
+
+
+
+
+
+
+
+import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+import MainPage from './b_pages/MainPage'
+import About from './b_pages/About'
+import Contact from './b_pages/Contact'
+import Layout from './b_layout/Layout'
+import History from './b_pages/History'
+import Users from './b_pages/Users'
+
+import UserProfile, { loader as userLoader } from "./b_pages/UserProfile";
+
+const check = async () => {
+  await new Promise(resolve => setTimeout(resolve, 7000)); // 7 seconds
+  return null; // or return some data
+};
+
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout/>, 
     children: [
       {index: true, element: <MainPage/>},
-      {path: "contact", element: <Contact/>},
+      {path: "contact", element: <Contact/>, loader: check},
       
       {
           path: "about", 
@@ -34,7 +53,8 @@ const router = createBrowserRouter([
               {path: "history", element: <History/>},
       ]},
 
-      {path: "users", element: <Users sample_users={hardcoded_users}/>}
+      {path: "users", element: <Users sample_users={hardcoded_users}/>},
+      {path: "users/:name", element: <UserProfile/>, loader: userLoader}
 
     ],
 
